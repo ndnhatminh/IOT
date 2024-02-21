@@ -2,10 +2,14 @@ import sys
 from Adafruit_IO import MQTTClient
 import time
 import random
+from dotenv import dotenv_values
+
+env_config = dotenv_values('.env')
 
 AIO_FEED_IDs = ['nutnhan1','nutnhan2']
-AIO_USERNAME = "nhatminh2010416"
-AIO_KEY = "aio_AaLE10UitLkKYN6Ku4U4MzvvUOv3"
+AIO_USERNAME = env_config['AIO_USERNAME']
+AIO_KEY = env_config['AIO_KEY']
+
 
 def connected(client):
     print("Ket noi thanh cong ...")
