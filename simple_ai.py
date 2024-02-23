@@ -9,15 +9,15 @@ np.set_printoptions(suppress=True)
 model = load_model("keras_Model.h5", compile=False)
 
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+# class_names = open("labels.txt", "r").readlines()
 
 # CAMERA can be 0 or 1 based on default camera of your computer
 
-labels = ['Không khẩu trang', 'Đeo khẩu trang', 'Không có người']
+class_names = ['Không khẩu trang', 'Đeo khẩu trang', 'Không có người']
 
-camera = cv2.VideoCapture(0, cv2.CAP_V4L)
+camera = cv2.VideoCapture(0)
 
-while True:
+def image_detector():
     # Grab the webcamera's image.
     ret, image = camera.read()
 
@@ -43,13 +43,13 @@ while True:
     # Print prediction and confidence score
     print("Class:", class_name[2:], end="")
     print("Confidence Score:", str(np.round(confidence_score * 100))[:-2], "%")
-
+    return class_name
     # Listen to the keyboard for presses.
-    keyboard_input = cv2.waitKey(1)
+    # keyboard_input = cv2.waitKey(1)
 
-    # 27 is the ASCII for the esc key on your keyboard.
-    if keyboard_input == 27:
-        break
+    # # 27 is the ASCII for the esc key on your keyboard.
+    # if keyboard_input == 27:
+    #     break
 
-camera.release()
-cv2.destroyAllWindows()
+# camera.release()
+# cv2.destroyAllWindows()
