@@ -21,13 +21,15 @@ def processData(client, data):
     data = data.replace("!", "")
     data = data.replace("#", "")
     splitData = data.split(":")
-    print(splitData)
+    # print(splitData)
     if splitData[1] == "T":
-        client.send_data("cambien1", splitData[2])
+        client.publish("cambien1", splitData[2])
 
 mess = ""
 def readSerial(client):
     bytesToRead = ser.inWaiting()
+    if bytesToRead :
+        print('byte: ', bytesToRead)
     if (bytesToRead > 0):
         global mess
         mess = mess + ser.read(bytesToRead).decode("UTF-8")
@@ -39,3 +41,7 @@ def readSerial(client):
                 mess = ""
             else:
                 mess = mess[end+1:]
+
+def writeData(data):
+    print(data)
+    ser.write(str(data).encode())
